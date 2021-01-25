@@ -1,0 +1,217 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load assign %}
+{% block title %}Cursos{% endblock %}
+{% block background %}{% load static %}{% static 'core/img/curso.png' %}{% endblock %}
+{% block headers %}
+	<h3 STYLE="text-shadow: 3px 3px 2px #434242;color:#f0f0f0" >INSTITUTO DE ACTUALIZACIÓN Y PERFECCIONAMIENTO PROFESIONAL</h3>
+	<h8  STYLE="text-shadow: 3px 3px 2px #434242;padding: 5px 0 0 0;" >Colegio de Procuradores de Rosario</h8>
+{% endblock %}
+{% block content %}
+
+<br>
+<center><STRONG><UNDERLINE><h3 style="text-shadow: 2px 1px 1px gray;color:#f0f0f0";>LISTADO DE CURSOS<br></h3></UNDERLINE></STRONG></center>
+<main role="main" style="background-color:#333333;">
+          {% load user_agents %}
+          {% if request|is_mobile or request|is_tablet %}
+              <div align="center" class="container mt-1" style="width:95%;background-color:#999898;box-shadow: 0 0 10px 5px grey;">
+
+          {% else %}
+
+              <div align="center" class="container mt-1" style="width:65%;background-color:#999898;box-shadow: 0 0 10px 5px grey;">
+          {% endif %}
+    {% for page in page_list|dictsort:"order" %}
+      <div  class="row">
+          {% load user_agents %}
+          {% if request|is_mobile or request|is_tablet %}
+            <div class="col-md-12 mt-2 mx-auto">
+          {% else %}
+            <div class="col-md-11 mt-2 mx-auto">
+          {% endif %}
+
+            {% if not page.is_past_due %}
+
+              {% ifequal page.order 1 %}
+
+                   {% load user_agents %}
+                   {% if request|is_mobile or request|is_tablet %}
+                                <h5 STYLE="text-shadow: 2px 2px 1px #b0aaaa;" align="center" class="mb-4 mt-2">{{page.title|upper|truncatechars:62}}</h5>
+                    {% else %}
+                                <h5 STYLE="text-shadow: 2px 2px 1px #b0aaaa;" align="center" class="mb-4"><br>{{page.title|upper|truncatechars:75}}</h5>
+                    {% endif %}
+              {% else %}
+                      {% ifnotequal yahay "si" %}
+                            <hr><center><STRONG><UNDERLINE><h4 style="text-shadow: 2px 1px 1px gray;color:#f0f0f0";>OTROS CURSOS</h4></UNDERLINE></STRONG></center><hr>
+                       {% endifnotequal %}
+                        {% if page.institucion %}
+                            {% load user_agents %}
+                            {% if request|is_mobile or request|is_tablet %}
+                             <a class="btn btn-primary btn-sm btn-block" href="{% url 'pages:page' page.id page.title|slugify %}?activo=SI"><h6 align="center" style="text-decoration: underline;font-size:small;">({{ page.institucion|upper }})<br>{{page.title|upper|truncatechars:38}}<br>{{page.fechacurso|date:"d/m/Y"}}</h6></a>
+                            {% else %}
+                            <a class="btn btn-primary btn-sm btn-block" href="{% url 'pages:page' page.id page.title|slugify %}?activo=SI"><h4 align="center" style="text-decoration: underline;font-size:large;">({{ page.institucion|upper }})<br>{{page.title|upper|truncatechars:57}}<br>{{page.fechacurso|date:"d/m/Y"}}</h4></a>
+                            {% endif %}
+                        {% else %}
+                             {% load user_agents %}
+                            {% if request|is_mobile or request|is_tablet %}
+                             <a class="btn btn-primary btn-sm btn-block" href="{% url 'pages:page' page.id page.title|slugify %}?activo=SI"><h6 align="center" style="text-decoration: underline;font-size:small;">{{page.title|upper|truncatechars:38}}<br>{{page.fechacurso|date:"d/m/Y"}}</h6></a>
+                            {% else %}
+                            <a class="btn btn-primary btn-sm btn-block" href="{% url 'pages:page' page.id page.title|slugify %}?activo=SI"><h4 align="center" style="text-decoration: underline;font-size:large;">{{page.title|upper|truncatechars:57}}<br>{{page.fechacurso|date:"d/m/Y"}}</h4></a>
+                            {% endif %}
+                        {% endif %}
+                 {% assign yahay "si" %}
+                {% endifequal %}
+
+              {% ifequal page.order 1 %}
+                {% if page.headerimg %}
+                        <hr>
+                        <img class="" style="padding-bottom: 0px;" width="100%" height="auto" src="{{page.headerimg.url}}"  alt="">
+                {% endif %}
+                <hr>
+	            <a  style="font-size:medium;" class="btn btn-primary btn-sm btn-block" href="{% url 'upersonas:plist' %}?cod={{page.codigo}}&ncu={{page.title}}"><b>INSCRIBIRSE</b></a>
+                <hr>
+                <table  cellpadding="2">
+                    <tr>
+                        <td style="text-decoration: underline;"><strong>Fecha</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>{{page.fechacurso|date:"d/m/Y"}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="text-decoration: underline;"><strong>Código</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>{{page.codigo|upper}}</strong></td>
+                    </tr>
+                  <tr>
+                    <td style="text-decoration: underline;"><strong>Horario</strong></td>
+                  </tr>
+                  <tr>
+                    <td>{{page.horacurso}}</strong></td>
+                  </tr>
+                  <tr>
+                    <td style="text-decoration: underline;"><strong>Modalidad</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Presencial.</td>
+                  </tr>
+                  <tr>
+                    <td style="text-decoration: underline;"><strong>Vestimenta</strong></td>
+                  </tr>
+                  <tr>
+                    <td>Formal.</td>
+                  </tr>
+                  <tr>
+                    <td valign="top" style="text-decoration: underline;"><strong>Dirigido a:</strong></td>
+                  </tr>
+                  <tr>
+                   <td width="30%" >Integrantes de las fuerzas de seguridad(policiales, penitenciarios, u otras).</br>
+                      <p>Judiciales (integrantes del Ministerio Público de la Acusación, del Servicio Público de Defensa Penal, 				Funcionarios,Magistrados,etc.).</br>
+                        Abogados, Procuradores, Peritos y expertos.
+                      </p>
+                      <p>
+                        Académicos: Docentes. Investigadores. Estudiantes avanzados de derecho.
+                      </p>
+                  </td>
+                  </tr>
+                  <tr>
+                    <td valign="top"  style="text-decoration: underline;"><strong>Organizan</strong></td>
+                  </tr>
+                  <tr>
+                    <td>{{page.content|safe}}</td>
+                  </tr>
+                  <tr>
+                    <td valign="top"  style="text-decoration: underline;"><strong>Disertantes</strong></td>
+                  </tr>
+                  <tr>
+                    <td>{{page.disertantescurso|safe}}</td>
+                  </tr>
+				  {% if page.temariocurso %}
+                  <tr>
+                    <td valign="top"  style="text-decoration: underline;"><strong>Temario</strong></td>
+                  </tr>
+                  <tr>
+                    <td>{{page.temariocurso|safe}}</td>
+                  </tr>
+				  {% endif %}
+                  <tr>
+                    <td valign="top"  style="text-decoration: underline;"><strong>Arancel</strong></td>
+                  </tr>
+                  <tr>
+                    <td>{{page.arancelcurso|safe|linebreaks}}</td>
+                  </tr>
+                  <tr>
+                    <td style="text-decoration: underline;"  valign="top"><strong>Localización</strong></td>
+                  </tr>
+                  <tr>
+                    <td align="left"><br><div id="map" style="width: 96%; height: 300px; border: 1px solid black;"></div></td>
+                    <script>// <![CDATA[
+                    function initMap() { var myLatLng = {{page.localizacioncurso}}; var map = new google.maps.Map(document.getElementById('map'), { zoom: 18,scrollwheel:true,draggable: true,overviewMapControl:false,panControl:false,streetViewControl:false,mapTypeControl:false,disableDefaultUI: false,zoomControl:true, center: myLatLng }); var marker = new google.maps.Marker({ position: myLatLng, map: map, title: 'Universidad Abierta Interamericana',animation: google.maps.Animation.BOUNCE }); }
+                    // ]]></script>
+                    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDE2b0Z87mzqCWk8v1tEIl4XxIcOXmVzIc&amp;signed_in=false&amp;callback=initMap" async=""></script>
+                  </tr>
+
+                </table>
+               {% endifequal %}
+            {% else %}
+                  {% assign pasado "si" %}
+            {% endif %}
+            {% ifnotequal pasado "si" %}
+                {% if forloop.last %}
+
+                    <hr>
+
+                {% endif %}
+           {% endifnotequal %}
+        </div>
+
+      </div>
+
+    {% endfor %}
+   {% for page in page_list|dictsort:"fechacurso" reversed %}
+      <div  class="row">
+          {% load user_agents %}
+          {% if request|is_mobile or request|is_tablet %}
+            <div class="col-md-12 mt-2 mx-auto">
+          {% else %}
+            <div class="col-md-11 mt-2 mx-auto">
+          {% endif %}
+
+            {% if page.is_past_due %}
+
+                {% ifnotequal finali "si" %}
+                     <hr><center><STRONG><UNDERLINE><h4 style="text-shadow: 2px 1px 1px gray;color:#f0f0f0";>CURSOS FINALIZADOS</h4></UNDERLINE></STRONG></center><hr>
+                {% endifnotequal %}
+
+                    {% if page.institucion %}
+                        {% load user_agents %}
+                        {% if request|is_mobile or request|is_tablet %}
+                         <a class="btn btn-primary btn-sm btn-block" href="{% url 'pages:page' page.id page.title|slugify %}"><h6 align="center" style="text-decoration: underline;font-size:small;">({{ page.institucion|upper }})<br>{{page.title|upper|truncatechars:38}}<br>{{page.fechacurso|date:"d/m/Y"}}</h6></a>
+						{% else %}
+                        <a class="btn btn-primary btn-sm btn-block" href="{% url 'pages:page' page.id page.title|slugify %}"><h4 align="center" style="text-decoration: underline;font-size:large;">({{ page.institucion|upper }})<br>{{page.title|upper|truncatechars:57}}<br>{{page.fechacurso|date:"d/m/Y"}}</h4></a>
+						{% endif %}
+                    {% else %}
+                        {% load user_agents %}
+                        {% if request|is_mobile or request|is_tablet %}
+                        <a class="btn btn-primary btn-sm btn-block" href="{% url 'pages:page' page.id page.title|slugify %}"><h6 align="center" style="text-decoration: underline;font-size:small;">{{page.title|upper|truncatechars:38}}<br>{{page.fechacurso|date:"d/m/Y"}}</h6></a>
+						{% else %}
+                        <a class="btn btn-primary btn-sm btn-block" href="{% url 'pages:page' page.id page.title|slugify %}"><h4 align="center" style="text-decoration: underline;font-size:large;">{{page.title|upper|truncatechars:57}}<br>{{page.fechacurso|date:"d/m/Y"}}</h4></a>
+						{% endif %}
+                    {% endif %}
+                {% assign finali "si" %}
+
+            {% endif %}
+                {% ifequal finali "si" %}
+                {% if forloop.last %}
+					<hr>
+                 {% endif %}
+                {% endifequal %}
+        </div>
+
+      </div>
+
+    {% endfor %}
+   </div>
+   
+</main>
+
+{% endblock %}

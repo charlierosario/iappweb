@@ -1,0 +1,45 @@
+
+{% load static %}
+{% block content %}
+<head>
+    <link href="https://iapprosario.com/static/core/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://iapprosario.com/static/core/css/clean-blog.min.css" rel="stylesheet">
+    <link href="{% static 'core/css/clean-blog.min.css' %}" rel="stylesheet">
+	<META HTTP-EQUIV="REFRESH" CONTENT="15;URL={% url 'home' %}">
+<title>Preinscripcion Exitosa</title>
+
+</head>
+<br>
+<center><STRONG><UNDERLINE><h3 style="text-shadow: 2px 1px 1px gray;color:#f0f0f0";>PREINSCRIPCION EXITOSA!</h3></UNDERLINE></STRONG></center>
+<main role="main"  style="background-color:#333333;">
+			{% load user_agents %}
+			{% if request|is_mobile or request|is_tablet %}
+
+				<div class="container" style="width:93%;background-color:#ababab;box-shadow: 0 0 10px 5px grey;">
+			{% else %}
+				<div class="container" style="width:65%;background-color:#ababab;box-shadow: 0 0 10px 5px grey;">
+			{% endif %}
+			<div class="col-xs-12 col-xl-10 col-lg-10 col-md-10 mt-8 mb-3 mx-auto">
+			<div class="row">
+			<justify>
+			  <div  style="padding-top:15px;text-shadow: 2px 1px 1px gray;color:#f0f0f0;color:black;"><h5><br>Gracias por preinscribirse!!</h5> Recuerde abonar el arancel antes del tiempo del vencimiento respectivo, el mismo figura en la descripción del curso en la sección arancel.<br>
+			      <br>
+                         <h7>
+                            En unos minutos le llegara un correo electronico a su casilla de email que ingreso
+                            en el formulario, si no aparece en bandeja de entrada revise la carpeta "correo no deseado".
+							<br> En segundos sera redirigido a la pagina principal.
+                         </h7>
+               </div>
+			       <br>
+		   </justify>
+		  </div>
+		  </div>
+		</div>
+</main>
+{% endblock %}
+<footer>
+
+	<p class="copyright" style="color:white">Copyright &copy; 2019 · Charlie Pioli</p>
+
+
+</footer>

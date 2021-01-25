@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <link href="https://iapprosario.com/static/core/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://iapprosario.com/static/core/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href="https://iapprosario.com/static/core/css/clean-blog.min.css" rel="stylesheet">
+<title>Preinscripcion no exitosa!</title>
+
+</head>
+<body>
+    <br>
+    <center><STRONG><UNDERLINE><div style="text-shadow: 2px 1px 1px gray;color:#f0f0f0;">FORMULARIO DE INSCRIPCION</div></UNDERLINE></STRONG></center>
+    <br>
+<main role="main"  style="background-color:#333333;">
+    <div class="container" style="width:50%;background-color:#ababab;box-shadow: 0 0 5px 5px grey;">
+
+
+                <div class="col-xl-12 col-lg-12 col-md-12 mx-auto mt-2 mb-2">
+                 <center>
+
+                     <div  style="padding-top:15px;text-shadow: 2px 1px 1px gray;color:#f0f0f0;color:red;"><h4>La preinscripción ha fallado!!</h4><br>
+                             Ud. ya esta preinscripto en este curso o jornada.
+
+                      </div>
+
+
+                 </center>
+                            <center>
+                            {% load user_agents %}
+                            {% if request|is_mobile or request|is_tablet %}
+                            <br><a style="font-size:small;" class="btn btn-primary btn-sm" href="{% url 'home' %}" ><strong>CERRAR</strong></a>
+                            {% else %}
+                            <br><a style="font-size:medium;" class="btn btn-primary btn-sm" href="{% url 'home' %}" ><strong>CERRAR</strong></a>
+                            {% endif %}
+                                <br>
+                            </center>
+         </div>
+        <br>
+    </div>
+</main>
+</body>
+<footer>
+
+            <p class="copyright" style="color:white">Copyright &copy; 2019 · Charlie Pioli</p>
+
+
+    </footer>
+</html>

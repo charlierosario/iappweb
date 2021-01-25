@@ -1,0 +1,117 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Inscripción{% endblock %}
+{% block background %}{% load static %}{% static 'core/img/contact-bg.jpg' %}{% endblock %}
+{% block headers %}
+  <h3 STYLE="text-shadow: 3px 3px 2px #434242;color:#f0f0f0" >INSTITUTO DE ACTUALIZACIÓN Y PERFECCIONAMIENTO PROFESIONAL</h3>
+  <h8  STYLE="text-shadow: 3px 3px 2px #434242;padding: 5px 0 0 0;" >Colegio de Procuradores de Rosario</h8>
+{% endblock %}
+
+<html>
+{% block content %}
+<head>
+
+     <script>
+
+
+       function tieneletras(){
+           var letras="abcdefghyjklmnñopqrstuvwxyz";
+           var dni = document.getElementById("id_dni");
+           var texto = dni.value;
+           texto = texto.toLowerCase();
+           for(i=0; i<texto.length; i++){
+              if (letras.indexOf(texto.charAt(i),0)!=-1){
+                   alert("Asegurese de ingresar solo numeros");
+                   dni.focus();
+                   return false;
+              }
+           }
+           return true;
+        }
+
+       function selco(){
+
+            var url_string = window.location.href
+            var url = new URL(url_string);
+            var c = url.searchParams.get("cod");
+            var txt = c
+            var d = url.searchParams.get("ncu");
+            var txn = d
+            document.getElementById("custi").value = txt
+            document.getElementById("nombrejornada").value = txn
+            document.getElementById("id_nombre").value = ""
+            var sel = document.getElementById('id_codcurso');
+            var opt = document.createElement('option');
+            opt.appendChild( document.createTextNode(txt) );
+            opt.value = 'option value';
+            sel.appendChild(opt);
+            $('#id_nombre').focus();
+       }
+
+        function validaNumericos(){
+                 var inputtxt = document.getElementById('id_dni');
+                 var valor = inputtxt.value;
+                 for(i=0;i<valor.length;i++){
+                     var code=valor.charCodeAt(i);
+                     if(code<=48 || code>=57){
+                        inputtxt.value="";
+                        return;
+                     }
+                 }
+        }
+     </script>
+
+</head>
+
+<body onload="selco()">
+
+<left>
+<br>
+<center><STRONG><UNDERLINE><h3 style="text-shadow: 2px 1px 1px gray;color:#f0f0f0";>FORMULARIO DE INSCRIPCION</h3></UNDERLINE></STRONG></center>
+<main role="main"  style="background-color:#333333;">
+{% load user_agents %}
+{% if request|is_mobile or request|is_tablet %}
+
+    <div class="container" style="width:95%;background-color:#ababab;box-shadow: 0 0 10px 5px grey;">
+{% else %}
+        <div class="container" style="width:50%;background-color:#ababab;box-shadow: 0 0 10px 5px grey;">
+{% endif %}
+         <div class="row mt-2">
+                <div class="col-xl-12 col-lg-12 col-md-12 mt-6">
+                  <div class="bg-faded rounded p-3">
+                     <form class="" action="{% url 'upersonas:plist' %}" method="post" id="formulario" onsubmit="return tieneletras()">
+                            {% csrf_token %}
+                        <div class="form-row">
+                          <div class="form-group col-md-12 mt-2">
+                              <div align="left" style="padding-bottom: 10px;"><h8>Código curso:</h8> <select style="font-size:14px;width:110px;" id="id_codcurso"name="codcurso"></select></div>
+                            {{ form.nombre|as_crispy_field  }}
+                            {{ form.apellidos|as_crispy_field }}
+                            {{ form.dni|as_crispy_field }}
+                            {{ form.direccion|as_crispy_field }}
+                            {{ form.telefono|as_crispy_field }}
+                            {{ form.email|as_crispy_field }}
+                             <div align="left" style="padding-bottom: 10px;">Procurador: {{ form.procurador }}</div>
+                                 {% load user_agents %}
+                                 {% if request|is_mobile or request|is_tablet %}
+                                    <input style="width:100%;" class="btn btn-primary btn-sm btn-block" type="submit" value="Inscribirse" />
+                                     <br><a style="font-size:small;" class="btn btn-primary btn-sm" href="{% url 'pages:pages' %}" ><strong>CERRAR</strong></a>
+                                 {% else %}
+                                <input style="font-size:large;width:100%;" class="btn btn-primary btn-md btn-block" type="submit" value="Inscribirse" />
+                                <center> <br><a style="font-size:medium;" class="btn btn-primary btn-sm" href="{% url 'pages:pages' %}" ><strong>CERRAR</strong></a></center>
+                                 {% endif %}
+                          </div>
+                        </div>
+                         <input type="hidden" id="nombrejornada" name="nombrecurso"/>
+                      <input type="hidden" id="custi" name="codigocurso"/>
+                     </form>
+                  </div>
+                </div>
+         </div>
+    </div>
+</main>
+</left>
+
+</body>
+{% endblock %}
+</html>

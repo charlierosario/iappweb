@@ -1,0 +1,178 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% block title %}{{page.title|upper}}{% endblock %}
+{% block background %}{% load static %}{% static 'core/img/curso.png' %}{% endblock %}
+ {% block headers %}
+  <h3 STYLE="text-shadow: 3px 3px 2px #434242;color:#f0f0f0" >INSTITUTO DE ACTUALIZACIÓN Y PERFECCIONAMIENTO PROFESIONAL</h3>
+  <h8  STYLE="text-shadow: 3px 3px 2px #434242;padding: 5px 0 0 0;" >Colegio de Procuradores de Rosario</h8>
+
+{% endblock %}
+{% block content %}
+
+<br>
+{% ifnotequal request.GET.activo "SI" %}
+{% if page.institucion %}
+<center><STRONG><UNDERLINE><h3 style="text-shadow: 2px 1px 1px gray;color:#5a5a5a;color:#f0f0f0";>CURSO DE ({{ page.institucion|upper }}) FINALIZADO</h3></UNDERLINE></STRONG></center>
+{% else %}
+<center><STRONG><UNDERLINE><h3 style="text-shadow: 2px 1px 1px gray;color:#5a5a5a;color:#f0f0f0";>CURSO FINALIZADO</h3></UNDERLINE></STRONG></center>
+{% endif %}
+{% else %}
+{% if page.institucion %}
+<center><STRONG><UNDERLINE><h3 style="text-shadow: 2px 1px 1px gray;color:#5a5a5a;color:#f0f0f0";>CURSO DE {{ page.institucion|upper }}</h3></UNDERLINE></STRONG></center>
+{% else %}
+<center><STRONG><UNDERLINE><h3 style="text-shadow: 2px 1px 1px gray;color:#5a5a5a;color:#f0f0f0";>CURSO ALTERNATIVO</h3></UNDERLINE></STRONG></center>
+{% endif %}
+{% endifnotequal %}
+<main role="main" style="background-color:#333333;">
+{% load user_agents %}
+{% if request|is_mobile or request|is_tablet %}
+    <div class="container" style="width:95%;background-color:#999898;box-shadow: 0 0 10px 5px grey;">
+{% else %}
+    <div class="container" style="width:65%;background-color:#999898;box-shadow: 0 0 10px 5px grey;">
+{% endif %}
+        <div  align="center" class="row">
+          {% load user_agents %}
+          {% if request|is_mobile or request|is_tablet %}
+            <div  class="col-md-11 mx-auto"  style="background-color:#c8c8c8;box-shadow: 0 0 10px 5px grey;color:#5a5a5a;">
+            <h6 style="text-shadow: 1px 2px 1px gray;color:#5a5a5a;" align="center" class="mb-4"><br><br>{{object.title|upper|safe|truncatechars:46}}</h6>
+
+          {% else %}
+                <div  class="col-md-9 mx-auto"  style="background-color:#c8c8c8;box-shadow: 0 0 10px 5px grey;color:#5a5a5a;">
+                <h5 style="text-shadow: 1px 2px 1px gray;color:#5a5a5a;" align="center" class="mb-4"><br><br>{{object.title|upper|safe|truncatechars:49}}</h5>
+          {% endif %}
+            <hr>
+                {% if page.headerimg %}
+
+                        <img class="" width="100%" height="auto" src="{{page.headerimg.url}}"  alt=""><hr>
+
+                {% endif %}
+                {% load user_agents %}
+                {% if request|is_mobile or request|is_tablet %}
+                   <table  class="col-md-12 mx-auto" cellpadding="1">
+                 {% else %}
+                    <table  class="col-md-11 mx-auto" cellpadding="1">
+                 {% endif %}
+                    <tr>
+                        <td style="text-decoration: underline;"><strong>Fecha</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>{{page.fechacurso|date:"d/m/Y"}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="text-decoration: underline;"><strong>Código</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>{{page.codigo|upper}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="text-decoration: underline;"><strong>Horario</strong></td>
+                    </tr>
+                    <tr>
+                        <td>{{page.horacurso}}</strong></td>
+                    </tr>
+                    <tr>
+                        <td style="text-decoration: underline;"><strong>Modalidad</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Presencial.</td>
+                    </tr>
+                    <tr>
+                        <td style="text-decoration: underline;"><strong>Vestimenta</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Formal.</td>
+                    </tr>
+                    <tr>
+                        <td valign="top" style="text-decoration: underline;"><strong>Dirigido a:</strong></td>
+                    </tr>
+                    <tr>
+                        <td width="30%" >Integrantes de las fuerzas de seguridad(policiales, penitenciarios, u otras).</br>
+                        <p>Judiciales (integrantes del Ministerio Público de la Acusación, del Servicio Público de Defensa Penal, 				Funcionarios,Magistrados,etc.).</br>
+                        Abogados, Procuradores, Peritos y expertos.</p>
+                        <p>
+                        Académicos: Docentes. Investigadores. Estudiantes avanzados de derecho.</p></td>
+                    </tr>
+                    <tr>
+                        <td valign="top"  style="text-decoration: underline;"><strong>Organizan</strong></td>
+                    </tr>
+                    <tr>
+                        <td>{{page.content|safe}}</td>
+                    </tr>
+                    <tr>
+                        <td valign="top"  style="text-decoration: underline;"><strong>Disertantes</strong></td>
+                    </tr>
+                    <tr>
+                        <td>{{page.disertantescurso|safe}}</td>
+                    </tr>
+					
+				  {% if page.temario %}
+                  <tr>
+                    <td valign="top"  style="text-decoration: underline;"><strong>Temario</strong></td>
+                  </tr>
+                  <tr>
+                    <td>{{page.temariocurso|safe}}</td>
+                  </tr>
+				  {% endif %}
+					
+                    <tr>
+                        <td valign="top"  style="text-decoration: underline;"><strong>Arancel</strong></td>
+                    </tr>
+                    <tr>
+                        <td>{{page.arancelcurso}}</td>
+                    </tr>
+				{% if page.auspicia %}
+                  <tr>
+                    <td valign="top"  style="text-decoration: underline;"><strong>Auspician</strong></td>
+                  </tr>
+                  <tr>
+                    <td>{{page.auspicia|safe}}</td>
+                  </tr>
+				  {% endif %}
+					
+                    <tr>
+                        <td style="text-decoration: underline;"  valign="top"><strong>Localizacion</strong></td>
+                    </tr>
+                    <tr>
+                        <td align="left"><br><div id="map" style="width: 96%; height: 300px; border: 1px solid black;"></div></td>
+                    </tr>
+                    <tr>
+                        <td><center>
+                            {% load user_agents %}
+                            {% if request|is_mobile or request|is_tablet %}
+                                  {% ifequal request.GET.activo "SI" %}
+                                        <br><a  style="font-size:medium;" class="btn btn-primary btn-sm btn-block" href="{% url 'upersonas:plist' %}?cod={{page.codigo}}&ncu={{page.title}}"><b>INSCRIBIRSE</b></a>
+                                  {% endifequal %}
+                                    <br><a style="font-size:small;" class="btn btn-primary btn-sm" href="{% url 'pages:pages' %}" ><strong>CERRAR</strong></a>
+
+                            {% else %}
+                                  {% ifequal request.GET.activo "SI" %}
+                                        <br><a  style="font-size:medium;" class="btn btn-primary btn-sm btn-block" href="{% url 'upersonas:plist' %}?cod={{page.codigo}}&ncu={{page.title}}"><b>INSCRIBIRSE</b></a>
+                                  {% endifequal %}
+                                     <br><a style="font-size:medium;" class="btn btn-primary btn-sm" href="{% url 'pages:pages' %}" ><strong>CERRAR</strong></a>
+
+                            {% endif %}
+                        </center></td>
+                    </tr>
+                </table>
+
+                 <br>
+
+                 <br>
+          </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+<script>// <![CDATA[
+function initMap() { var myLatLng = {{page.localizacioncurso}}; var map = new google.maps.Map(document.getElementById('map'), { zoom: 18,scrollwheel:true,draggable: true,overviewMapControl:false,panControl:false,streetViewControl:false,mapTypeControl:false,disableDefaultUI: false,zoomControl:true, center: myLatLng }); var marker = new google.maps.Marker({ position: myLatLng, map: map, title: 'Universidad Abierta Interamericana',animation: google.maps.Animation.BOUNCE }); }
+// ]]></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDE2b0Z87mzqCWk8v1tEIl4XxIcOXmVzIc&amp;signed_in=false&amp;callback=initMap" async=""></script>
+
+
+
+
+
+{% endblock %}

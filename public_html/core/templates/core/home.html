@@ -1,0 +1,47 @@
+{% extends 'core/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Inicio{% endblock %}
+{% block background %}{% load static %}{% static 'core/img/home-bg.jpg' %}{% endblock %}
+{% block headers %}
+	<h3 STYLE="text-shadow: 3px 3px 2px #434242;color:#f0f0f0" >INSTITUTO DE ACTUALIZACIÓN Y PERFECCIONAMIENTO PROFESIONAL</h3>
+	<h8  STYLE="text-shadow: 3px 3px 2px #434242;padding: 5px 0 0 0;" >Colegio de Procuradores de Rosario</h8>
+{% endblock %}
+{% block content %}
+<br>
+<center><STRONG><UNDERLINE><h3 style="text-shadow: 2px 1px 1px gray;color:#f0f0f0";>ACERCA DE NOSOTROS</h3></UNDERLINE></STRONG></center>
+<main role="main"  style="background-color:#333333;">
+			{% load user_agents %}
+			{% if request|is_mobile or request|is_tablet %}
+
+				<div class="container" style="width:93%;background-color:#ababab;box-shadow: 0 0 10px 5px grey;">
+			{% else %}
+					<div class="container" style="width:65%;background-color:#ababab;box-shadow: 0 0 10px 5px grey;">
+			{% endif %}
+
+			<div class="col-xs-12 col-xl-10 col-lg-10 col-md-10 mt-4 mb-3 mx-auto">
+			<div class="row">
+			<justify>
+					<p align="justify">
+						<br>
+						El Instituto de Actualización y Perfeccionamiento Profesional, tiene por objetivo brindar una capacitación constante y actualizada para los profesionales afines al poder judicial.<br> Nuestras Jornadas y cursos son dictados por Docentes y Profesionales especialistas en el tema en cuestión.
+						<br>A través de esta página web se informará sobre los próximos cursos y jornadas que se dictarán y a los cuales podrá inscribirse en forma online, para esto deberá ir al menu "Cursos" y allí le aparecerá el listado del curso que se dará próximo como
+					    los cursos que ya se dieron anteriormente (sección finalizados), para preinscribirse haga click en "INSCRIBIRSE" y rellene el formulario de preinscripción.
+						<br>Por dudas o sugerencias contactese al administrador: <a href="mailto:contacto@iapprosario.com">contacto@iapprosario.com</a>
+						<blockquote>
+						<p style="text-align: justify;"></p>
+						</blockquote>
+						<br>
+						   Directores IAPP:
+						<ul>
+						   <li>Dr.Alejandro Riera (Abogado)</li>
+						   <li>Dr.Rodrigo Sebastian Dominguez (Procurador)</li>
+						</ul>
+						<br>
+					</p>
+		   </justify>
+		  </div>
+		  </div>
+			</div>
+</main>
+{% endblock %}
